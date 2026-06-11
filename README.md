@@ -84,7 +84,3 @@ Contributions welcome once the testing methodology and first attack catalog are 
 [Apache License 2.0](LICENSE)
 
 Payloads and attack samples in this repository are provided for **authorized security testing and research only**. The authors are not responsible for misuse.
-
-## Topics
-
-`ai-security` · `llm-security` · `ai-redteam` · `prompt-injection` · `adversarial-ml` · `garak` · `pyrit` · `mitre-atlas` · `security-testing`
