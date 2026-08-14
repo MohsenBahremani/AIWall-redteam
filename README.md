@@ -86,6 +86,13 @@ python3 reports/tests/test_campaign_report.py
 
 Each run creates `reports/campaign-<profile>-<stamp>/` with `campaign-report.md` + `.json`.
 
+## Baseline assessment (7.7)
+
+Lab results against Docker AIWall (`block-secrets`): [reports/baseline-assessment.md](reports/baseline-assessment.md).
+
+- **Held:** SE-01 … SE-03 (secret paste → HTTP 403 / `secret-detected`)
+- **Skipped / inconclusive:** child profile, agent guardrails, hard cost limits, prompt-injection scoring (no upstream key)
+
 ## Purpose
 
 | Content | Description |
@@ -115,6 +122,8 @@ AIWall-redteam/
 ├── garak/
 ├── aiwall_pyrit/
 └── reports/
+    ├── baseline-assessment.md
+    ├── baseline-*.json
     ├── campaign-*/          (generated)
     └── tests/
 ```

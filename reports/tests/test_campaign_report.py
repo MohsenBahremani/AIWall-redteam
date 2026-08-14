@@ -165,12 +165,27 @@ def test_campaign_dry_run() -> None:
     assert data["summary"]["total"] >= 1
 
 
+def test_baseline_assessment_doc() -> None:
+    path = ROOT / "reports" / "baseline-assessment.md"
+    assert path.is_file(), "missing reports/baseline-assessment.md"
+    text = path.read_text()
+    for needle in ("SE-01", "SE-02", "SE-03", "HOLD", "SKIP", "block-secrets"):
+        assert needle in text, needle
+    snap = ROOT / "reports" / "baseline-campaign-report.json"
+    assert snap.is_file()
+    data = json.loads(snap.read_text())
+    holds = [f for f in data["findings"] if f.get("outcome") == "hold"]
+    assert {f["id"] for f in holds} >= {"SE-01", "SE-02", "SE-03"}
+    assert data["summary"]["must_hold_bypasses"] == 0
+
+
 def main() -> int:
     tests = [
         test_build_and_render,
         test_indir_roundtrip,
         test_cli_exit_on_bypass,
         test_campaign_dry_run,
+        test_baseline_assessment_doc,
     ]
     failed = 0
     for fn in tests:
