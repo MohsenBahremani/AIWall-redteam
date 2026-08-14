@@ -77,7 +77,7 @@ For a single probe:
 | **Error** | Gateway/upstream failure — rerun; do not count as hold without analysis |
 | **Inconclusive** | Misconfigured lab (control disabled, wrong profile key) |
 
-Campaign reports (later tasks) aggregate holds vs bypasses per category.
+Campaign reports aggregate holds vs bypasses per category (`scripts/run_campaign.sh` → `reports/campaign-*/campaign-report.md`).
 
 ## Tooling progression
 
@@ -87,10 +87,10 @@ Campaign reports (later tasks) aggregate holds vs bypasses per category.
 | 7.3 | Payload library loaders |
 | 7.4 | Garak configs → AIWall endpoint (`garak/`, `scripts/run_garak.py`) |
 | 7.5 | PyRIT orchestrators + scorers (`aiwall_pyrit/`, `scripts/run_pyrit.py`) |
-| 7.6 | `scripts/run_campaign.sh` + `generate_report.py` |
+| 7.6 | `scripts/run_campaign.sh` + `generate_report.py` → `reports/campaign-*/` |
 | 7.8 | CI regression of must-block cases |
 
-Until automation lands, manual tests still follow RoE and this methodology.
+Campaign reports aggregate holds vs bypasses per category (`campaign-report.md` + `.json`). Must-hold bypasses are listed as product follow-ups.
 
 ## Manual probe example (secret hold)
 

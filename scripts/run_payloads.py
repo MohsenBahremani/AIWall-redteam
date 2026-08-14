@@ -152,6 +152,7 @@ def cmd_run(
     must_hold_only: bool,
     timeout: float,
     skip_requires: set[str],
+    json_out: Path | None = None,
 ) -> int:
     base = base_url.rstrip("/")
     payloads = load_all(category)
@@ -162,16 +163,39 @@ def cmd_run(
     holds = 0
     fails = 0
     skipped = 0
+    results: list[dict[str, Any]] = []
 
     for raw in payloads:
         expected = raw.get("expected") or {}
         if must_hold_only and not expected.get("must_hold"):
             skipped += 1
+            results.append(
+                {
+                    "id": raw.get("id"),
+                    "technique_id": raw.get("technique_id"),
+                    "category": raw.get("category"),
+                    "must_hold": bool(expected.get("must_hold")),
+                    "outcome": "skip",
+                    "detail": "not must_hold",
+                    "http_status": None,
+                }
+            )
             continue
         requires = set(raw.get("requires") or [])
         if requires & skip_requires:
             print(f"skip {raw['id']}: requires {sorted(requires & skip_requires)}")
             skipped += 1
+            results.append(
+                {
+                    "id": raw.get("id"),
+                    "technique_id": raw.get("technique_id"),
+                    "category": raw.get("category"),
+                    "must_hold": bool(expected.get("must_hold")),
+                    "outcome": "skip",
+                    "detail": f"requires {sorted(requires & skip_requires)}",
+                    "http_status": None,
+                }
+            )
             continue
 
         expanded = expand_templates(copy_payload(raw), values)
@@ -181,21 +205,61 @@ def cmd_run(
             status, body = _post_json(url, expanded["request"]["json"], headers, timeout)
         except ConnectionError as exc:
             print(f"FAIL {raw['id']}: connection error: {exc}", file=sys.stderr)
+            results.append(
+                {
+                    "id": raw.get("id"),
+                    "technique_id": raw.get("technique_id"),
+                    "category": raw.get("category"),
+                    "must_hold": bool(expected.get("must_hold")),
+                    "outcome": "error",
+                    "detail": str(exc),
+                    "http_status": None,
+                }
+            )
+            if json_out:
+                _write_payload_json(json_out, base, results)
             return 1
 
         ok, detail = _evaluate(expanded, status, body)
         ran += 1
         if ok:
             holds += 1 if expected.get("must_hold") else 0
+            outcome = "hold" if expected.get("must_hold") else "recorded"
             print(f"ok  {raw['id']}: http={status} {detail}")
         else:
             fails += 1
+            outcome = "bypass" if expected.get("must_hold") else "fail"
             print(f"FAIL {raw['id']}: http={status} {detail}", file=sys.stderr)
             if isinstance(body, dict):
                 print(f"     body={json.dumps(body)[:300]}", file=sys.stderr)
 
+        results.append(
+            {
+                "id": raw.get("id"),
+                "technique_id": raw.get("technique_id"),
+                "category": raw.get("category"),
+                "must_hold": bool(expected.get("must_hold")),
+                "outcome": outcome,
+                "detail": detail,
+                "http_status": status,
+            }
+        )
+
     print(f"ran={ran} must_hold_ok~={holds} fail={fails} skipped={skipped}")
+    if json_out:
+        _write_payload_json(json_out, base, results)
     return 1 if fails else 0
+
+
+def _write_payload_json(path: Path, base_url: str, results: list[dict[str, Any]]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "schema": "aiwall.redteam.payload_results.v1",
+        "target": base_url,
+        "results": results,
+    }
+    path.write_text(json.dumps(payload, indent=2) + "\n")
+    print(f"json {path}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -210,6 +274,11 @@ def main(argv: list[str] | None = None) -> int:
         help="Comma-separated requires flags to skip (e.g. child_profile,daily_limit)",
     )
     parser.add_argument("--timeout", type=float, default=60.0)
+    parser.add_argument(
+        "--json-out",
+        default="",
+        help="Write structured results JSON (for campaign reports)",
+    )
     args = parser.parse_args(argv)
 
     if args.list:
@@ -226,6 +295,7 @@ def main(argv: list[str] | None = None) -> int:
         pass
     print(f"target {base} (key={'set' if key else 'none'})")
     print("Reminder: authorized lab targets only — see docs/rules-of-engagement.md")
+    json_out = Path(args.json_out) if args.json_out else None
     return cmd_run(
         category=args.category,
         base_url=base,
@@ -233,6 +303,7 @@ def main(argv: list[str] | None = None) -> int:
         must_hold_only=args.must_hold_only,
         timeout=args.timeout,
         skip_requires=skip,
+        json_out=json_out,
     )
 
 

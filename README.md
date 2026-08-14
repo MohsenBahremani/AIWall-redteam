@@ -64,6 +64,28 @@ python3 aiwall_pyrit/tests/test_pyrit_campaign.py
 
 Details: [aiwall_pyrit/README.md](aiwall_pyrit/README.md).
 
+## Campaign runner (7.6)
+
+One command runs probes and writes a report under `reports/`:
+
+```bash
+# Offline (inventory only)
+./scripts/run_campaign.sh --dry-run
+
+# Lab smoke: must-hold payloads + PyRIT
+export AIWALL_BASE_URL=http://127.0.0.1:8080
+export AIWALL_API_KEY=…
+./scripts/run_campaign.sh --skip-pyrit          # payloads only
+./scripts/run_campaign.sh                       # payloads + pyrit
+./scripts/run_campaign.sh --full --with-garak   # broader + Garak
+
+# Aggregate existing artifacts
+python3 scripts/generate_report.py --indir reports/campaign-smoke-…
+python3 reports/tests/test_campaign_report.py
+```
+
+Each run creates `reports/campaign-<profile>-<stamp>/` with `campaign-report.md` + `.json`.
+
 ## Purpose
 
 | Content | Description |
@@ -73,6 +95,7 @@ Details: [aiwall_pyrit/README.md](aiwall_pyrit/README.md).
 | **Payload library** | Category-organized probes + runner |
 | **Garak** | Configs + runner for AIWall OpenAI-compatible endpoint |
 | **PyRIT** | Orchestrators + scorers (`aiwall_pyrit/`) |
+| **Campaign / reports** | `run_campaign.sh` + `generate_report.py` |
 | **Reports / regression** | Baseline, retest, CI must-block suite |
 
 ## Layout
@@ -85,21 +108,15 @@ AIWall-redteam/
 │   ├── payload_lib.py
 │   ├── run_payloads.py
 │   ├── run_garak.py
-│   └── run_pyrit.py
+│   ├── run_pyrit.py
+│   ├── run_campaign.sh
+│   ├── generate_report.py
+│   └── campaign_inventory.py
 ├── garak/
-│   ├── configs/
-│   ├── reports/
-│   ├── tests/
-│   └── README.md
 ├── aiwall_pyrit/
-│   ├── targets/
-│   ├── scorers/
-│   ├── orchestrators/
-│   ├── objectives/
-│   ├── reports/
-│   ├── tests/
-│   └── README.md
-└── reports/           (upcoming)
+└── reports/
+    ├── campaign-*/          (generated)
+    └── tests/
 ```
 
 ## Relationship to AIWall
