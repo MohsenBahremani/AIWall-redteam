@@ -153,6 +153,7 @@ def cmd_run(
     timeout: float,
     skip_requires: set[str],
     json_out: Path | None = None,
+    only_ids: set[str] | None = None,
 ) -> int:
     base = base_url.rstrip("/")
     payloads = load_all(category)
@@ -166,6 +167,8 @@ def cmd_run(
     results: list[dict[str, Any]] = []
 
     for raw in payloads:
+        if only_ids is not None and raw.get("id") not in only_ids:
+            continue
         expected = raw.get("expected") or {}
         if must_hold_only and not expected.get("must_hold"):
             skipped += 1
@@ -245,6 +248,12 @@ def cmd_run(
             }
         )
 
+    if only_ids is not None:
+        missing = only_ids - {r["id"] for r in results}
+        if missing:
+            print(f"FAIL missing payload ids: {sorted(missing)}", file=sys.stderr)
+            fails += len(missing)
+
     print(f"ran={ran} must_hold_ok~={holds} fail={fails} skipped={skipped}")
     if json_out:
         _write_payload_json(json_out, base, results)
@@ -279,6 +288,11 @@ def main(argv: list[str] | None = None) -> int:
         default="",
         help="Write structured results JSON (for campaign reports)",
     )
+    parser.add_argument(
+        "--ids",
+        default="",
+        help="Comma-separated payload ids to run (e.g. SE-01,SE-02)",
+    )
     args = parser.parse_args(argv)
 
     if args.list:
@@ -296,6 +310,7 @@ def main(argv: list[str] | None = None) -> int:
     print(f"target {base} (key={'set' if key else 'none'})")
     print("Reminder: authorized lab targets only — see docs/rules-of-engagement.md")
     json_out = Path(args.json_out) if args.json_out else None
+    only_ids = {x.strip() for x in args.ids.split(",") if x.strip()} or None
     return cmd_run(
         category=args.category,
         base_url=base,
@@ -304,6 +319,7 @@ def main(argv: list[str] | None = None) -> int:
         timeout=args.timeout,
         skip_requires=skip,
         json_out=json_out,
+        only_ids=only_ids,
     )
 
 

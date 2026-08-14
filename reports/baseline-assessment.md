@@ -87,6 +87,8 @@ Must stay blocked in CI / must-hold suite:
 
 - **SE-01**, **SE-02**, **SE-03** (secret paste → 403 + `secret-detected`)
 
+Wired as [`regression/must_block.json`](../regression/must_block.json); run via `python3 scripts/run_regression.py`.
+
 ## Reproduce
 
 ```bash

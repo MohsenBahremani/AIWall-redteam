@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  offline-and-regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Methodology + catalog docs
+        run: python3 docs/tests/test_methodology_docs.py
+
+      - name: Payload library
+        run: python3 payloads/tests/test_payloads.py
+
+      - name: Campaign report helpers
+        run: python3 reports/tests/test_campaign_report.py
+
+      - name: Must-block regression suite
+        run: |
+          python3 scripts/run_regression.py --list
+          python3 scripts/run_regression.py --stub
+          python3 scripts/run_regression.py --expect-fail
+          python3 regression/tests/test_regression.py

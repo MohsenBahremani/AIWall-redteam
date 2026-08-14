@@ -93,6 +93,19 @@ Lab results against Docker AIWall (`block-secrets`): [reports/baseline-assessmen
 - **Held:** SE-01 … SE-03 (secret paste → HTTP 403 / `secret-detected`)
 - **Skipped / inconclusive:** child profile, agent guardrails, hard cost limits, prompt-injection scoring (no upstream key)
 
+## Must-block regression (7.8)
+
+CI fails if a previously-blocked attack starts succeeding. Registry: [`regression/must_block.json`](regression/must_block.json).
+
+```bash
+python3 scripts/run_regression.py --stub          # pass on hold stub
+python3 scripts/run_regression.py --expect-fail   # prove suite fails on bypass
+python3 regression/tests/test_regression.py
+# Lab: AIWALL_BASE_URL=http://127.0.0.1:8080 python3 scripts/run_regression.py
+```
+
+GitHub Actions: [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
+
 ## Purpose
 
 | Content | Description |
@@ -103,7 +116,8 @@ Lab results against Docker AIWall (`block-secrets`): [reports/baseline-assessmen
 | **Garak** | Configs + runner for AIWall OpenAI-compatible endpoint |
 | **PyRIT** | Orchestrators + scorers (`aiwall_pyrit/`) |
 | **Campaign / reports** | `run_campaign.sh` + `generate_report.py` |
-| **Reports / regression** | Baseline, retest, CI must-block suite |
+| **Regression** | Must-block suite (`regression/`) + CI |
+| **Reports / baseline** | Baseline + post-mitigation retest |
 
 ## Layout
 
@@ -121,6 +135,10 @@ AIWall-redteam/
 │   └── campaign_inventory.py
 ├── garak/
 ├── aiwall_pyrit/
+├── regression/
+│   ├── must_block.json
+│   ├── tests/
+│   └── README.md
 └── reports/
     ├── baseline-assessment.md
     ├── baseline-*.json

@@ -89,7 +89,8 @@ Campaign reports aggregate holds vs bypasses per category (`scripts/run_campaign
 | 7.5 | PyRIT orchestrators + scorers (`aiwall_pyrit/`, `scripts/run_pyrit.py`) |
 | 7.6 | `scripts/run_campaign.sh` + `generate_report.py` → `reports/campaign-*/` |
 | 7.7 | Baseline assessment → [`reports/baseline-assessment.md`](../reports/baseline-assessment.md) |
-| 7.8 | CI regression of must-block cases |
+| 7.8 | Must-block regression → [`regression/`](../regression/) + [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) |
+| 7.9 | Post-mitigation retest report |
 
 Campaign reports aggregate holds vs bypasses per category (`campaign-report.md` + `.json`). Must-hold bypasses are listed as product follow-ups.
 

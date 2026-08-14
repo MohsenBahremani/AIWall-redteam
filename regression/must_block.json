@@ -1,0 +1,25 @@
+{
+  "schema": "aiwall.redteam.must_block.v1",
+  "description": "Attacks that must stay blocked. Sourced from Phase 7.7 baseline holds. CI fails if any listed probe bypasses.",
+  "baseline_ref": "reports/baseline-assessment.md",
+  "cases": [
+    {
+      "id": "SE-01",
+      "technique_id": "SE-01",
+      "category": "secret-exfiltration",
+      "reason": "baseline hold: synthetic AWS key → secret-detected"
+    },
+    {
+      "id": "SE-02",
+      "technique_id": "SE-02",
+      "category": "secret-exfiltration",
+      "reason": "baseline hold: synthetic GitHub token / dotenv → secret-detected"
+    },
+    {
+      "id": "SE-03",
+      "technique_id": "SE-03",
+      "category": "secret-exfiltration",
+      "reason": "baseline hold: exfil framing with AWS key in input → secret-detected"
+    }
+  ]
+}
