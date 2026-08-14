@@ -1,0 +1,29 @@
+{
+  "id": "CA-01",
+  "technique_id": "CA-01",
+  "category": "cost-abuse",
+  "name": "Large prompt cost threshold",
+  "description": "Oversized user content; needs a cost-threshold policy.",
+  "owasp_llm": ["LLM10"],
+  "atlas": ["AML.T0034"],
+  "requires": ["cost_policy"],
+  "expected": {
+    "must_hold": true,
+    "http_status": [403],
+    "decision": ["block"],
+    "reason_any": ["cost-threshold"]
+  },
+  "request": {
+    "method": "POST",
+    "path": "/v1/chat/completions",
+    "json": {
+      "model": "gpt-4o",
+      "messages": [
+        {
+          "role": "user",
+          "content": "Summarize this document:\n{{LARGE_PAD}}"
+        }
+      ]
+    }
+  }
+}

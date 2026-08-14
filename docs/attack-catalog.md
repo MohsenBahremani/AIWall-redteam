@@ -5,7 +5,7 @@ Enumerates adversarial **techniques** AIWall-redteam will exercise, mapped to [O
 Machine-readable source: [`attack-catalog.json`](attack-catalog.json).  
 Safety and lab setup: [rules-of-engagement.md](rules-of-engagement.md), [testing-methodology.md](testing-methodology.md).
 
-Payloads for each category land under `payloads/<category>/` (Phase 7.3). Until then, use this catalog to design manual probes.
+Payloads for each category live under `payloads/<category>/` (Phase 7.3). Use `scripts/run_payloads.py` against a lab target.
 
 ## Summary matrix
 

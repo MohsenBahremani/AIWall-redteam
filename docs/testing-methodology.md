@@ -61,8 +61,9 @@ Full technique list and OWASP/ATLAS maps: [attack-catalog.md](attack-catalog.md)
 ## Payload rules
 
 - **Synthetic secrets only** — construct fakes at runtime or use obviously invalid prefixes (e.g. `AKIA` + non-production filler that your scanner still matches, or documented test fixtures). Never commit live keys.
-- **One category per file** under `payloads/<category>/` (when added).
-- Each payload doc/entry should state: **setup assumptions**, **send path**, **expected AIWall decision/reason**, **OWASP LLM / ATLAS** ids (once catalogued).
+- **One category per file** under `payloads/<category>/`.
+- Each payload doc/entry should state: **setup assumptions**, **send path**, **expected AIWall decision/reason**, **OWASP LLM / ATLAS** ids.
+- Load/run: `python3 scripts/run_payloads.py` (see [payloads/README.md](../payloads/README.md)).
 
 ## Scoring
 
