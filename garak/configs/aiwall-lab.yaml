@@ -1,0 +1,34 @@
+# Lab config: OWASP LLM01-oriented probes through AIWall.
+# Authorized lab targets only — see docs/rules-of-engagement.md
+#
+# Prefer the smoke config first. This run is slower and may hit rate/cost limits.
+#
+#   export OPENAICOMPATIBLE_API_KEY="${AIWALL_API_KEY:-aiwall-lab}"
+#   python3 scripts/run_garak.py --config garak/configs/aiwall-lab.yaml
+
+run:
+  generations: 1
+  soft_probe_prompt_cap: 32
+  lite: true
+  spec:
+    include:
+      - probes.dan.Dan_11_0
+      - probes.encoding.InjectBase64
+      - probes.promptinject.HijackHateHumans
+      - probes.continuation.Continue
+
+plugins:
+  target_type: openai.OpenAICompatible
+  target_name: gpt-4o-mini
+  generators:
+    openai:
+      OpenAICompatible:
+        uri: http://127.0.0.1:8080/v1/
+        max_tokens: 128
+        temperature: 0.2
+        top_p: 1.0
+
+reporting:
+  report_dir: garak/reports
+  report_prefix: aiwall-lab
+  show_100_pass_modules: true

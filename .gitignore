@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Garak run artifacts
+garak/reports/*
+!garak/reports/.gitkeep

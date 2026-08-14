@@ -1,0 +1,31 @@
+# Smoke config: tiny probe set for a quick AIWall lab check.
+# Authorized targets only — see docs/rules-of-engagement.md
+#
+#   export OPENAICOMPATIBLE_API_KEY="${AIWALL_API_KEY:-aiwall-lab}"
+#   python3 scripts/run_garak.py --config garak/configs/aiwall-smoke.yaml
+#
+# Override endpoint with AIWALL_BASE_URL (default http://127.0.0.1:8080).
+
+run:
+  generations: 1
+  soft_probe_prompt_cap: 4
+  lite: true
+  spec:
+    include:
+      - probes.dan.Dan_11_0
+
+plugins:
+  target_type: openai.OpenAICompatible
+  target_name: gpt-4o-mini
+  generators:
+    openai:
+      OpenAICompatible:
+        uri: http://127.0.0.1:8080/v1/
+        max_tokens: 64
+        temperature: 0.1
+        top_p: 1.0
+
+reporting:
+  report_dir: garak/reports
+  report_prefix: aiwall-smoke
+  show_100_pass_modules: true

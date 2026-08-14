@@ -34,6 +34,21 @@ python3 scripts/run_payloads.py --skip-requires child_profile,daily_limit,cost_p
 
 Details: [payloads/README.md](payloads/README.md).
 
+## Garak (7.4)
+
+OpenAI-compatible scans through AIWall:
+
+```bash
+pip install -r requirements.txt
+export AIWALL_BASE_URL=http://127.0.0.1:8080
+export OPENAICOMPATIBLE_API_KEY="${AIWALL_API_KEY:-aiwall-lab}"
+python3 scripts/run_garak.py --config garak/configs/aiwall-smoke.yaml
+# reports → garak/reports/
+python3 garak/tests/test_garak_configs.py
+```
+
+Details: [garak/README.md](garak/README.md).
+
 ## Purpose
 
 | Content | Description |
@@ -41,7 +56,8 @@ Details: [payloads/README.md](payloads/README.md).
 | **Rules / methodology** | Authorization, safety, lab setup, scoring |
 | **Attack catalog** | Techniques mapped to OWASP LLM Top 10 / MITRE ATLAS |
 | **Payload library** | Category-organized probes + runner |
-| **Garak / PyRIT** | Automated campaigns against the AIWall endpoint (next) |
+| **Garak** | Configs + runner for AIWall OpenAI-compatible endpoint |
+| **PyRIT** | Multi-turn orchestrators (next) |
 | **Reports / regression** | Baseline, retest, CI must-block suite |
 
 ## Layout
@@ -49,22 +65,16 @@ Details: [payloads/README.md](payloads/README.md).
 ```text
 AIWall-redteam/
 ├── docs/
-│   ├── rules-of-engagement.md
-│   ├── testing-methodology.md
-│   ├── attack-catalog.md
-│   ├── attack-catalog.json
-│   └── tests/
 ├── payloads/
-│   ├── prompt-injection/
-│   ├── secret-exfiltration/
-│   ├── unsafe-content/
-│   ├── agent-tool-abuse/
-│   ├── cost-abuse/
-│   └── tests/
 ├── scripts/
 │   ├── payload_lib.py
-│   └── run_payloads.py
-├── garak/             (upcoming)
+│   ├── run_payloads.py
+│   └── run_garak.py
+├── garak/
+│   ├── configs/
+│   ├── reports/
+│   ├── tests/
+│   └── README.md
 ├── pyrit/             (upcoming)
 └── reports/           (upcoming)
 ```

@@ -1,0 +1,3 @@
+# Optional tooling for Garak / catalog YAML (Phase 7.4+)
+pyyaml>=6.0
+garak>=0.10
