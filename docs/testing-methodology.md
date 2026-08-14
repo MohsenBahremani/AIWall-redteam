@@ -46,7 +46,7 @@ Client (curl / Open WebUI / campaign runner)
 | Control panel Events / Blocked / `/agents` | Human triage during interactive tests |
 | [AIWall-detections](https://github.com/MohsenBah/AIWall-detections) | Optional: confirm SIEM/Loki rules fire on the same export |
 
-## Attack categories (Phase 7.2+)
+## Attack categories
 
 | Category | Intent | Typical expected hold |
 |---|---|---|
@@ -56,7 +56,7 @@ Client (curl / Open WebUI / campaign runner)
 | Agent tool abuse | Dangerous shell/file/tool calls | block / approval-denied |
 | Cost abuse | Blow through spend or rate | `cost-threshold` / `daily-limit` |
 
-Catalog details and OWASP/ATLAS maps land in `docs/attack-catalog.md` (task 7.2).
+Full technique list and OWASP/ATLAS maps: [attack-catalog.md](attack-catalog.md) ([`attack-catalog.json`](attack-catalog.json)).
 
 ## Payload rules
 

@@ -10,7 +10,8 @@ Validates that gateway controls hold under prompt injection, secret exfiltration
 
 1. Read [docs/rules-of-engagement.md](docs/rules-of-engagement.md) — scope, safety, disclosure.
 2. Read [docs/testing-methodology.md](docs/testing-methodology.md) — lab target setup and scoring.
-3. Stand up a **lab** AIWall (prefer local/mock upstream). Confirm a benign request audits as `allow`.
+3. Skim [docs/attack-catalog.md](docs/attack-catalog.md) — techniques + OWASP/ATLAS maps.
+4. Stand up a **lab** AIWall (prefer local/mock upstream). Confirm a benign request audits as `allow`.
 
 Offline doc check:
 
@@ -22,9 +23,9 @@ python3 docs/tests/test_methodology_docs.py
 
 | Content | Description |
 |---|---|
-| **Rules / methodology** | Authorization, safety, lab setup, scoring (this milestone) |
-| **Attack catalog** | Scenarios mapped to OWASP LLM Top 10 / MITRE ATLAS (next) |
-| **Payload library** | Category-organized probes |
+| **Rules / methodology** | Authorization, safety, lab setup, scoring |
+| **Attack catalog** | Techniques mapped to OWASP LLM Top 10 / MITRE ATLAS |
+| **Payload library** | Category-organized probes (next) |
 | **Garak / PyRIT** | Automated campaigns against the AIWall endpoint |
 | **Reports / regression** | Baseline, retest, CI must-block suite |
 
@@ -35,6 +36,8 @@ AIWall-redteam/
 ├── docs/
 │   ├── rules-of-engagement.md
 │   ├── testing-methodology.md
+│   ├── attack-catalog.md
+│   ├── attack-catalog.json
 │   └── tests/
 ├── payloads/          (upcoming)
 ├── garak/             (upcoming)
