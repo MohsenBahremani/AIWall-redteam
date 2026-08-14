@@ -106,6 +106,20 @@ python3 regression/tests/test_regression.py
 
 GitHub Actions: [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
+## Post-mitigation retest (7.9)
+
+Before/after deltas vs baseline: [reports/post-mitigation-retest.md](reports/post-mitigation-retest.md).
+
+```bash
+python3 scripts/compare_campaigns.py \
+  --before reports/baseline-campaign-report.json \
+  --after reports/retest-campaign-report.json \
+  -o /tmp/delta
+python3 reports/tests/test_compare_campaigns.py
+```
+
+Current control retest: **14/14 unchanged**, SE holds stable, **0 regressions**.
+
 ## Purpose
 
 | Content | Description |
@@ -117,7 +131,7 @@ GitHub Actions: [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 | **PyRIT** | Orchestrators + scorers (`aiwall_pyrit/`) |
 | **Campaign / reports** | `run_campaign.sh` + `generate_report.py` |
 | **Regression** | Must-block suite (`regression/`) + CI |
-| **Reports / baseline** | Baseline + post-mitigation retest |
+| **Baseline / retest** | Assessment + per-attack deltas |
 
 ## Layout
 
@@ -132,6 +146,8 @@ AIWall-redteam/
 │   ├── run_pyrit.py
 │   ├── run_campaign.sh
 │   ├── generate_report.py
+│   ├── compare_campaigns.py
+│   ├── run_regression.py
 │   └── campaign_inventory.py
 ├── garak/
 ├── aiwall_pyrit/
@@ -141,7 +157,8 @@ AIWall-redteam/
 │   └── README.md
 └── reports/
     ├── baseline-assessment.md
-    ├── baseline-*.json
+    ├── post-mitigation-retest.md
+    ├── baseline-*.json / retest-*.json
     ├── campaign-*/          (generated)
     └── tests/
 ```

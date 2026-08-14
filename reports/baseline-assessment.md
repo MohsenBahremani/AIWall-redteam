@@ -99,7 +99,7 @@ cd AIWall-redteam
 export AIWALL_BASE_URL=http://127.0.0.1:8080
 unset OPENAICOMPATIBLE_API_KEY   # avoid accidental wrong targets
 ./scripts/run_campaign.sh --full --skip-pyrit
-# Compare new report to this baseline; Phase 7.9 documents deltas
+# Compare new report to this baseline; Phase 7.9 documents deltas — see post-mitigation-retest.md
 ```
 
 ## Scope limits

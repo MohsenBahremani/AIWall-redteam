@@ -90,9 +90,9 @@ Campaign reports aggregate holds vs bypasses per category (`scripts/run_campaign
 | 7.6 | `scripts/run_campaign.sh` + `generate_report.py` → `reports/campaign-*/` |
 | 7.7 | Baseline assessment → [`reports/baseline-assessment.md`](../reports/baseline-assessment.md) |
 | 7.8 | Must-block regression → [`regression/`](../regression/) + [`.github/workflows/ci.yml`](../.github/workflows/ci.yml) |
-| 7.9 | Post-mitigation retest report |
+| 7.9 | Post-mitigation retest → [`reports/post-mitigation-retest.md`](../reports/post-mitigation-retest.md) + `scripts/compare_campaigns.py` |
 
-Campaign reports aggregate holds vs bypasses per category (`campaign-report.md` + `.json`). Must-hold bypasses are listed as product follow-ups.
+Campaign reports aggregate holds vs bypasses per category (`campaign-report.md` + `.json`). Must-hold bypasses are listed as product follow-ups. Retests use `compare_campaigns.py` for per-attack before/after deltas.
 
 ## Manual probe example (secret hold)
 

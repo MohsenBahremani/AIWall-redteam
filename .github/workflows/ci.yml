@@ -23,7 +23,9 @@ jobs:
         run: python3 payloads/tests/test_payloads.py
 
       - name: Campaign report helpers
-        run: python3 reports/tests/test_campaign_report.py
+        run: |
+          python3 reports/tests/test_campaign_report.py
+          python3 reports/tests/test_compare_campaigns.py
 
       - name: Must-block regression suite
         run: |
