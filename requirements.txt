@@ -1,3 +1,6 @@
-# Optional tooling for Garak / catalog YAML (Phase 7.4+)
+# Optional tooling for Garak / PyRIT (Phase 7.4+)
+# Note: garak and pyrit may pin conflicting transitive deps; use separate
+# venvs if both need to be installed in the same environment.
 pyyaml>=6.0
 garak>=0.10
+pyrit>=0.10

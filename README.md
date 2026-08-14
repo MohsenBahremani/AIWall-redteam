@@ -49,6 +49,21 @@ python3 garak/tests/test_garak_configs.py
 
 Details: [garak/README.md](garak/README.md).
 
+## PyRIT (7.5)
+
+Prompt-send campaigns with AIWall-aware target + scorers (`aiwall_pyrit/` avoids shadowing installed `pyrit`):
+
+```bash
+pip install -r requirements.txt   # or: pip install 'pyrit>=0.10'
+export AIWALL_BASE_URL=http://127.0.0.1:8080
+export AIWALL_API_KEY=…           # if auth enabled
+python3 scripts/run_pyrit.py
+# reports → aiwall_pyrit/reports/
+python3 aiwall_pyrit/tests/test_pyrit_campaign.py
+```
+
+Details: [aiwall_pyrit/README.md](aiwall_pyrit/README.md).
+
 ## Purpose
 
 | Content | Description |
@@ -57,7 +72,7 @@ Details: [garak/README.md](garak/README.md).
 | **Attack catalog** | Techniques mapped to OWASP LLM Top 10 / MITRE ATLAS |
 | **Payload library** | Category-organized probes + runner |
 | **Garak** | Configs + runner for AIWall OpenAI-compatible endpoint |
-| **PyRIT** | Multi-turn orchestrators (next) |
+| **PyRIT** | Orchestrators + scorers (`aiwall_pyrit/`) |
 | **Reports / regression** | Baseline, retest, CI must-block suite |
 
 ## Layout
@@ -69,13 +84,21 @@ AIWall-redteam/
 ├── scripts/
 │   ├── payload_lib.py
 │   ├── run_payloads.py
-│   └── run_garak.py
+│   ├── run_garak.py
+│   └── run_pyrit.py
 ├── garak/
 │   ├── configs/
 │   ├── reports/
 │   ├── tests/
 │   └── README.md
-├── pyrit/             (upcoming)
+├── aiwall_pyrit/
+│   ├── targets/
+│   ├── scorers/
+│   ├── orchestrators/
+│   ├── objectives/
+│   ├── reports/
+│   ├── tests/
+│   └── README.md
 └── reports/           (upcoming)
 ```
 

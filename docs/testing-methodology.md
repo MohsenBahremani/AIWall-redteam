@@ -86,7 +86,7 @@ Campaign reports (later tasks) aggregate holds vs bypasses per category.
 | 7.1 (this doc) | Manual curl + audit export |
 | 7.3 | Payload library loaders |
 | 7.4 | Garak configs → AIWall endpoint (`garak/`, `scripts/run_garak.py`) |
-| 7.5 | PyRIT orchestrators + scorers |
+| 7.5 | PyRIT orchestrators + scorers (`aiwall_pyrit/`, `scripts/run_pyrit.py`) |
 | 7.6 | `scripts/run_campaign.sh` + `generate_report.py` |
 | 7.8 | CI regression of must-block cases |
 
