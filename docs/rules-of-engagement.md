@@ -43,7 +43,7 @@ If authorization is unclear, **do not run**.
 
 1. File bypasses against [AIWall](https://github.com/MohsenBah/AIWall) (private security contact if/when published; otherwise a GitHub issue marked clearly as a security finding and coordinated with maintainers).
 2. Do not open a public “here’s how to bypass” write-up until a fix or mitigating config is available, or maintainers explicitly approve.
-3. Successful attacks that are *intended* product gaps become **requirements**; blocked attacks become **regression** cases in later Phase 7 tasks.
+3. Successful attacks that are *intended* product gaps become **requirements**; blocked attacks become **regression** cases in `regression/must_block.json`, which `scripts/run_regression.py` and CI enforce on every change.
 
 ## Tester checklist
 

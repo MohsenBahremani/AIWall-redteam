@@ -31,7 +31,7 @@ Detection overlap (when audit reasons fire): [AIWall-detections coverage matrix]
 | **PI-02** | Jailbreak / safety bypass | LLM01 | AML.T0054, AML.T0051 | Category / family policies | `category-blocked` when classifiers match |
 | **PI-03** | System / meta-prompt extraction | LLM07, LLM01 | AML.T0056, AML.T0051 | Gap | Usually `allow` — track bypasses as product work |
 
-**Notes:** Gateway-level injection detection is an intentional gap called out in detections ATLAS coverage. Red-team results here drive Phase 6/8 requirements more than current Wazuh rules.
+**Notes:** Gateway-level injection detection is an intentional gap, tracked in the AIWall-detections ATLAS coverage matrix (AML.T0051, AML.T0054, AML.T0056). Results from these techniques feed detection and product backlogs rather than matching any current Wazuh rule.
 
 ---
 

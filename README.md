@@ -30,6 +30,8 @@ export AIWALL_API_KEY=…   # if gateway_auth / profile keys enabled
 python3 scripts/run_payloads.py --category secret-exfiltration --must-hold-only
 # Skip probes that need child keys / cost policies / etc.:
 python3 scripts/run_payloads.py --skip-requires child_profile,daily_limit,cost_policy,agent_guardrails
+# Run specific techniques:
+python3 scripts/run_payloads.py --ids SE-01,SE-02
 ```
 
 Details: [payloads/README.md](payloads/README.md).
@@ -119,6 +121,23 @@ python3 reports/tests/test_compare_campaigns.py
 ```
 
 Current control retest: **14/14 unchanged**, SE holds stable, **0 regressions**.
+
+## Script flag reference
+
+Every runner takes `--help`; this is the full set.
+
+| Script | Flags |
+|---|---|
+| `scripts/run_payloads.py` | `--list`, `--dry-run`, `--category`, `--ids` (comma-separated technique ids), `--must-hold-only`, `--skip-requires`, `--timeout`, `--json-out` |
+| `scripts/run_regression.py` | `--list`, `--stub`, `--expect-fail`, `--registry` (alternate `must_block.json`), `--json-out` |
+| `scripts/run_garak.py` | `--config`, `--dry-run` |
+| `scripts/run_campaign.sh` | `--smoke`, `--full`, `--dry-run`, `--skip-pyrit`, `--with-garak`, `--skip-garak`, `--skip-requires`, `--category` |
+| `scripts/generate_report.py` | `--indir`, `--payloads`, `--pyrit`, `--campaign-id`, `--target`, `-o/--out` |
+| `scripts/compare_campaigns.py` | `--before`, `--after`, `--before-label`, `--after-label`, `-o/--out` |
+
+Two exit-code behaviors matter in CI: `generate_report.py` exits 1 when a must-hold payload was bypassed, and `compare_campaigns.py` exits 1 when the delta contains regressions. `compare_campaigns.py` always writes `campaign-delta.json` and `campaign-delta.md` inside the `-o` directory.
+
+CI (`.github/workflows/ci.yml`) runs only the offline checks — methodology tests, payload tests, campaign/compare tests, and the regression stub. Garak, PyRIT, and live campaigns stay manual because they need a lab target.
 
 ## Purpose
 

@@ -96,14 +96,24 @@ Campaign reports aggregate holds vs bypasses per category (`campaign-report.md` 
 
 ## Manual probe example (secret hold)
 
+Payload files under `payloads/` are descriptors, not raw request bodies: the body lives under `.request.json` and placeholders like `{{FAKE_AWS_KEY}}` are expanded at runtime. Pipe one through `jq` rather than posting the file directly:
+
 ```bash
 # Expect HTTP 403 and audit reason secret-detected when block-secrets (or equivalent) is on.
-# Use only synthetic material — replace BODY with a fixture from payloads/ when available.
-curl -sS -o /tmp/out.json -w "%{http_code}\n" \
-  -X POST "http://127.0.0.1:8080/v1/chat/completions" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $AIWALL_API_KEY" \
-  -d @payloads/secret-exfiltration/example.json   # added in 7.3
+# Use only synthetic material.
+jq '.request.json' payloads/secret-exfiltration/SE-01.json \
+  | sed 's/{{FAKE_AWS_KEY}}/AKIAIOSFODNN7EXAMPLE/' \
+  | curl -sS -o /tmp/out.json -w "%{http_code}\n" \
+      -X POST "http://127.0.0.1:8080/v1/chat/completions" \
+      -H "Content-Type: application/json" \
+      -H "Authorization: Bearer $AIWALL_API_KEY" \
+      -d @-
+```
+
+Or let the runner handle expansion and expectations for you:
+
+```bash
+python3 scripts/run_payloads.py --ids SE-01
 ```
 
 Then confirm:

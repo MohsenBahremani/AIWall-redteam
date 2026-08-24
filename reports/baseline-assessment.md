@@ -67,7 +67,7 @@ Block shape observed:
 }
 ```
 
-Note: this container image did not expose `/events/export.jsonl` (404). Evidence is the chat-completions HTTP response. Prefer a current AIWall build for SIEM-side confirmation next time.
+Note: the container image used for this run (2026-08-14) did not expose `/events/export.jsonl` (404), so the evidence here is the chat-completions HTTP response rather than the audit feed. Current AIWall builds do serve that endpoint — use it for SIEM-side confirmation when reproducing this baseline.
 
 ## What is not proven / product follow-ups
 
