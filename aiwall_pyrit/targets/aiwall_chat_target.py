@@ -55,12 +55,9 @@ def parse_block_from_exception(exc: BaseException) -> str | None:
 class AIWallChatTarget(OpenAIChatTarget):
     """OpenAIChatTarget that converts AIWall 403 blocks into scoreable messages."""
 
-    async def _send_prompt_to_target_async(self, *, normalized_conversation: list[Message]) -> list[Message]:
-        message = normalized_conversation[-1]
+    async def send_prompt_async(self, *, message: Message) -> list[Message]:
         try:
-            return await super()._send_prompt_to_target_async(
-                normalized_conversation=normalized_conversation
-            )
+            return await super().send_prompt_async(message=message)
         except Exception as exc:  # noqa: BLE001
             block = parse_block_from_exception(exc)
             if block is None:

@@ -5,6 +5,7 @@
 #   python3 scripts/run_garak.py --config garak/configs/aiwall-smoke.yaml
 #
 # Override endpoint with AIWALL_BASE_URL (default http://127.0.0.1:8080).
+# Override model with AIWALL_MODEL when your lab only routes Ollama (e.g. llama3.2:1b).
 
 run:
   generations: 1

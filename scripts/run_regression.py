@@ -146,6 +146,7 @@ def run_suite(*, base_url: str, api_key: str | None, ids: list[str], json_out: P
         category=None,
         base_url=base_url,
         api_key=api_key,
+        model_override=os.environ.get("AIWALL_MODEL"),
         must_hold_only=False,
         timeout=30.0,
         skip_requires=set(),

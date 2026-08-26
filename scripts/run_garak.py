@@ -4,6 +4,7 @@
 """Run Garak against AIWall using a checked-in YAML config.
 
 Overrides generator uri from AIWALL_BASE_URL (default http://127.0.0.1:8080).
+Optional AIWALL_MODEL overrides plugins.target_name (e.g. llama3.2:1b for Ollama-only labs).
 Requires: pip install 'garak>=0.10' and an authorized lab target.
 """
 
@@ -45,6 +46,10 @@ def _set_uri(cfg: dict, base_url: str) -> str:
     return uri
 
 
+def _set_model(cfg: dict, model: str) -> None:
+    cfg.setdefault("plugins", {})["target_name"] = model
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -67,6 +72,9 @@ def main(argv: list[str] | None = None) -> int:
     base = os.environ.get("AIWALL_BASE_URL", "http://127.0.0.1:8080")
     cfg = _load_yaml(config_path)
     uri = _set_uri(cfg, base)
+    model = os.environ.get("AIWALL_MODEL", "").strip()
+    if model:
+        _set_model(cfg, model)
 
     reporting = cfg.setdefault("reporting", {})
     report_dir = Path(reporting.get("report_dir") or "garak/reports")
@@ -78,6 +86,8 @@ def main(argv: list[str] | None = None) -> int:
     print("Reminder: authorized lab targets only — docs/rules-of-engagement.md")
     print(f"config  {config_path}")
     print(f"uri     {uri}")
+    if model:
+        print(f"model   {model} (AIWALL_MODEL override)")
     print(f"reports {report_dir}")
 
     if not os.environ.get("OPENAICOMPATIBLE_API_KEY"):

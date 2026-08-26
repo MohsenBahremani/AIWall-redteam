@@ -6,6 +6,7 @@
 Environment:
   AIWALL_BASE_URL   default http://127.0.0.1:8080
   AIWALL_API_KEY    optional Bearer token (profile or gateway key)
+  AIWALL_MODEL      optional model id override for all payloads
 
 Examples::
 
@@ -149,6 +150,7 @@ def cmd_run(
     category: str | None,
     base_url: str,
     api_key: str | None,
+    model_override: str | None,
     must_hold_only: bool,
     timeout: float,
     skip_requires: set[str],
@@ -202,6 +204,8 @@ def cmd_run(
             continue
 
         expanded = expand_templates(copy_payload(raw), values)
+        if model_override:
+            expanded["request"]["json"]["model"] = model_override
         path = expanded["request"]["path"]
         url = base + path
         try:
@@ -302,12 +306,15 @@ def main(argv: list[str] | None = None) -> int:
 
     base = os.environ.get("AIWALL_BASE_URL", "http://127.0.0.1:8080")
     key = os.environ.get("AIWALL_API_KEY")
+    model_override = os.environ.get("AIWALL_MODEL") or None
     skip = {x.strip() for x in args.skip_requires.split(",") if x.strip()}
     # Default: skip probes that need special lab setup unless operator clears the set
     if not skip and not args.must_hold_only:
         # When running full suite without flags, still attempt all; operator can skip
         pass
     print(f"target {base} (key={'set' if key else 'none'})")
+    if model_override:
+        print(f"model  {model_override} (AIWALL_MODEL override)")
     print("Reminder: authorized lab targets only — see docs/rules-of-engagement.md")
     json_out = Path(args.json_out) if args.json_out else None
     only_ids = {x.strip() for x in args.ids.split(",") if x.strip()} or None
@@ -315,6 +322,7 @@ def main(argv: list[str] | None = None) -> int:
         category=args.category,
         base_url=base,
         api_key=key,
+        model_override=model_override,
         must_hold_only=args.must_hold_only,
         timeout=args.timeout,
         skip_requires=skip,

@@ -17,4 +17,4 @@ AIWall-redteam techniques map to SIEM sample lines and rules in
 4. If a new stable reason appears, open a PR on AIWall-detections to add a sample line, expected hit, and bridge row.
 5. Score a live export: `AIWall-detections/scripts/validate_export.sh --with-regression` (from a sibling checkout).
 
-Must-block cases in `regression/must_block.json` (SE-01…SE-03) already have detection coverage via `req-secret-001` / Wazuh 100210.
+Must-block cases in `regression/must_block.json` (SE-01…SE-03) already have detection coverage via `req-secret-001` / Wazuh 107210.

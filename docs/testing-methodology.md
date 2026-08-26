@@ -129,6 +129,7 @@ curl -sS "http://127.0.0.1:8080/events/export.jsonl?decision=block&window_hours=
 |---|---|
 | `AIWALL_BASE_URL` | e.g. `http://127.0.0.1:8080` (campaign scripts will use this later) |
 | `AIWALL_API_KEY` | Lab profile key; never commit |
+| `AIWALL_MODEL` | Optional model override when your lab routes a different id (e.g. `llama3.2:1b`) |
 | `AIWALL_CONFIG` | Path to lab YAML with presets under test |
 
 ## Related
