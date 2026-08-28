@@ -85,6 +85,7 @@ def test_run_against_stub_target() -> None:
             category="secret-exfiltration",
             base_url=base,
             api_key=None,
+            model_override=None,
             must_hold_only=True,
             timeout=5.0,
             skip_requires=set(),
