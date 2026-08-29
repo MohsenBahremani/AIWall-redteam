@@ -29,7 +29,7 @@ Client (curl / Open WebUI / campaign runner)
 
 ### Suggested steps
 
-1. Run AIWall from the [AIWall](https://github.com/MohsenBah/AIWall) repo (venv or Docker). Example config: `aiwall.yaml.example` or family example under `deploy/examples/`.
+1. Run AIWall from the [AIWall](https://github.com/MohsenBahremani/AIWall) repo (venv or Docker). Example config: `aiwall.yaml.example` or family example under `deploy/examples/`.
 2. Enable the controls you intend to test (developer/child presets, `agent_guardrails`, cost limits).
 3. Point the client at `http://127.0.0.1:8080/v1` with a lab API key if `gateway_auth` is on.
 4. Confirm a benign chat completes and shows an `allow` row in the UI or:
@@ -44,7 +44,7 @@ Client (curl / Open WebUI / campaign runner)
 |---|---|
 | `GET /events/export.jsonl` | Canonical decisions (`decision`, `reason`, `matched_rule_ids`, …) |
 | Control panel Events / Blocked / `/agents` | Human triage during interactive tests |
-| [AIWall-detections](https://github.com/MohsenBah/AIWall-detections) | Optional: confirm SIEM/Loki rules fire on the same export |
+| [AIWall-detections](https://github.com/MohsenBahremani/AIWall-detections) | Optional: confirm SIEM/Loki rules fire on the same export |
 
 ## Attack categories
 
@@ -134,5 +134,5 @@ curl -sS "http://127.0.0.1:8080/events/export.jsonl?decision=block&window_hours=
 ## Related
 
 - [rules-of-engagement.md](rules-of-engagement.md)
-- AIWall: [secret-scanning.md](https://github.com/MohsenBah/AIWall/blob/main/docs/secret-scanning.md), [agent-guardrails.md](https://github.com/MohsenBah/AIWall/blob/main/docs/agent-guardrails.md), [family-mode.md](https://github.com/MohsenBah/AIWall/blob/main/docs/family-mode.md)
-- Detections playbooks: [AIWall-detections/playbooks](https://github.com/MohsenBah/AIWall-detections/tree/main/playbooks)
+- AIWall: [secret-scanning.md](https://github.com/MohsenBahremani/AIWall/blob/main/docs/secret-scanning.md), [agent-guardrails.md](https://github.com/MohsenBahremani/AIWall/blob/main/docs/agent-guardrails.md), [family-mode.md](https://github.com/MohsenBahremani/AIWall/blob/main/docs/family-mode.md)
+- Detections playbooks: [AIWall-detections/playbooks](https://github.com/MohsenBahremani/AIWall-detections/tree/main/playbooks)

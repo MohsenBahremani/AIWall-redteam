@@ -1,6 +1,6 @@
 # AIWall-redteam
 
-Adversarial testing for [AIWall](https://github.com/MohsenBah/AIWall): payloads, campaigns, and mitigation validation.
+Adversarial testing for [AIWall](https://github.com/MohsenBahremani/AIWall): payloads, campaigns, and mitigation validation.
 
 Validates that gateway controls hold under prompt injection, secret exfiltration, unsafe content, agent tool abuse, and cost abuse.
 
@@ -195,7 +195,7 @@ AIWall-redteam ── probes ──► audit export (aiwall.audit.v1)
         +── bypasses → product requirements / fixes
 ```
 
-Optional: ship the same export into [AIWall-detections](https://github.com/MohsenBah/AIWall-detections) to confirm SIEM/Loki detections.
+Optional: ship the same export into [AIWall-detections](https://github.com/MohsenBahremani/AIWall-detections) to confirm SIEM/Loki detections.
 
 ## Contributing
 

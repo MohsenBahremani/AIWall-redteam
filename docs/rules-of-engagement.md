@@ -16,7 +16,7 @@ If authorization is unclear, **do not run**.
 
 - AIWall as an OpenAI-compatible **gateway** (`/v1/chat/completions` and related routes)
 - Controls: policy engine, secret scanning, family/category blocks, cost/daily limits, agent guardrails / approvals
-- Observability: audit export (`aiwall.audit.v1`), control-panel events, detection packs in [AIWall-detections](https://github.com/MohsenBah/AIWall-detections)
+- Observability: audit export (`aiwall.audit.v1`), control-panel events, detection packs in [AIWall-detections](https://github.com/MohsenBahremani/AIWall-detections)
 
 ## Scope (out)
 
@@ -41,7 +41,7 @@ If authorization is unclear, **do not run**.
 
 ## Disclosure
 
-1. File bypasses against [AIWall](https://github.com/MohsenBah/AIWall) (private security contact if/when published; otherwise a GitHub issue marked clearly as a security finding and coordinated with maintainers).
+1. File bypasses against [AIWall](https://github.com/MohsenBahremani/AIWall) (private security contact if/when published; otherwise a GitHub issue marked clearly as a security finding and coordinated with maintainers).
 2. Do not open a public “here’s how to bypass” write-up until a fix or mitigating config is available, or maintainers explicitly approve.
 3. Successful attacks that are *intended* product gaps become **requirements**; blocked attacks become **regression** cases in `regression/must_block.json`, which `scripts/run_regression.py` and CI enforce on every change.
 

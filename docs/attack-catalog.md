@@ -17,7 +17,7 @@ Payloads for each category live under `payloads/<category>/` (Phase 7.3). Use `s
 | [Agent tool abuse](#agent-tool-abuse) | AT-01 … AT-03 | LLM06 | AML.T0050 / AML.T0053 |
 | [Cost abuse](#cost-abuse) | CA-01 … CA-03 | LLM10 | AML.T0034 / AML.T0046 |
 
-Detection overlap (when audit reasons fire): [AIWall-detections coverage matrix](https://github.com/MohsenBah/AIWall-detections/blob/main/docs/coverage-matrix.md).
+Detection overlap (when audit reasons fire): [AIWall-detections coverage matrix](https://github.com/MohsenBahremani/AIWall-detections/blob/main/docs/coverage-matrix.md).
 
 ---
 
@@ -47,7 +47,7 @@ Detection overlap (when audit reasons fire): [AIWall-detections coverage matrix]
 
 **Synthetic secrets only** — see RoE and methodology.
 
-Playbook: [secret-leak-detected](https://github.com/MohsenBah/AIWall-detections/blob/main/playbooks/secret-leak-detected.md).
+Playbook: [secret-leak-detected](https://github.com/MohsenBahremani/AIWall-detections/blob/main/playbooks/secret-leak-detected.md).
 
 ---
 
@@ -60,7 +60,7 @@ Playbook: [secret-leak-detected](https://github.com/MohsenBah/AIWall-detections/
 | **UC-01** | Explicit / sexual (child profile) | LLM05, LLM09 | AML.T0048 | Child preset + categories | `category-blocked` |
 | **UC-02** | Unsafe / violence categories | LLM05 | AML.T0048 | Category policies | `category-blocked` when matched |
 
-Playbook: [child-safety-block](https://github.com/MohsenBah/AIWall-detections/blob/main/playbooks/child-safety-block.md).
+Playbook: [child-safety-block](https://github.com/MohsenBahremani/AIWall-detections/blob/main/playbooks/child-safety-block.md).
 
 ---
 
@@ -74,7 +74,7 @@ Playbook: [child-safety-block](https://github.com/MohsenBah/AIWall-detections/bl
 | **AT-02** | Sensitive file read | LLM06, LLM02 | AML.T0053, AML.T0055 | File path rules | block / require_approval |
 | **AT-03** | Medium-risk shell (e.g. sudo) | LLM06 | AML.T0050 | warn band | `warn` (partial) |
 
-Playbook: [suspicious-agent-action](https://github.com/MohsenBah/AIWall-detections/blob/main/playbooks/suspicious-agent-action.md).  
+Playbook: [suspicious-agent-action](https://github.com/MohsenBahremani/AIWall-detections/blob/main/playbooks/suspicious-agent-action.md).  
 Run only on disposable lab hosts (RoE).
 
 ---

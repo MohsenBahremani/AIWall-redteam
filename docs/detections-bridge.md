@@ -1,12 +1,12 @@
 # Detections bridge
 
 AIWall-redteam techniques map to SIEM sample lines and rules in
-[AIWall-detections](https://github.com/MohsenBah/AIWall-detections).
+[AIWall-detections](https://github.com/MohsenBahremani/AIWall-detections).
 
 | Resource | Location |
 |---|---|
 | Machine-readable map | `AIWall-detections/validation/redteam_bridge.json` |
-| Operator guide | [AIWall-detections docs/redteam-bridge.md](https://github.com/MohsenBah/AIWall-detections/blob/main/docs/redteam-bridge.md) |
+| Operator guide | [AIWall-detections docs/redteam-bridge.md](https://github.com/MohsenBahremani/AIWall-detections/blob/main/docs/redteam-bridge.md) |
 | Sample corpus | `AIWall-detections/validation/samples/aiwall.audit.v1.sample.jsonl` |
 
 ## Workflow
