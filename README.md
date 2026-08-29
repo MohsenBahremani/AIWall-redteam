@@ -12,6 +12,7 @@ Validates that gateway controls hold under prompt injection, secret exfiltration
 2. Read [docs/testing-methodology.md](docs/testing-methodology.md) — lab target setup and scoring.
 3. Skim [docs/attack-catalog.md](docs/attack-catalog.md) — techniques + OWASP/ATLAS maps.
 4. Stand up a **lab** AIWall (prefer local/mock upstream). Confirm a benign request audits as `allow`.
+5. Optional: see [docs/detections-bridge.md](docs/detections-bridge.md) for how holds map into AIWall-detections.
 
 ## Payload library (7.3)
 
