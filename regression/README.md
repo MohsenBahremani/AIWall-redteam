@@ -1,6 +1,6 @@
 # Must-block regression suite
 
-Cases that **must stay blocked** (from the Phase 7.7 baseline). CI fails if any bypass.
+Cases that **must stay blocked** (from the baseline assessment). CI fails if any bypass.
 
 Registry: [`must_block.json`](must_block.json)
 

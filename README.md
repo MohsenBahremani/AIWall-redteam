@@ -14,7 +14,7 @@ Validates that gateway controls hold under prompt injection, secret exfiltration
 4. Stand up a **lab** AIWall (prefer local/mock upstream). Confirm a benign request audits as `allow`.
 5. Optional: see [docs/detections-bridge.md](docs/detections-bridge.md) for how holds map into AIWall-detections.
 
-## Payload library (7.3)
+## Payload library
 
 Fixtures live under [`payloads/`](payloads/) (one JSON file per catalog technique). Synthetic secrets are expanded at run time.
 
@@ -37,7 +37,7 @@ python3 scripts/run_payloads.py --ids SE-01,SE-02
 
 Details: [payloads/README.md](payloads/README.md).
 
-## Garak (7.4)
+## Garak
 
 OpenAI-compatible scans through AIWall:
 
@@ -52,7 +52,7 @@ python3 garak/tests/test_garak_configs.py
 
 Details: [garak/README.md](garak/README.md).
 
-## PyRIT (7.5)
+## PyRIT
 
 Prompt-send campaigns with AIWall-aware target + scorers (`aiwall_pyrit/` avoids shadowing installed `pyrit`):
 
@@ -67,7 +67,7 @@ python3 aiwall_pyrit/tests/test_pyrit_campaign.py
 
 Details: [aiwall_pyrit/README.md](aiwall_pyrit/README.md).
 
-## Campaign runner (7.6)
+## Campaign runner
 
 One command runs probes and writes a report under `reports/`:
 
@@ -89,14 +89,14 @@ python3 reports/tests/test_campaign_report.py
 
 Each run creates `reports/campaign-<profile>-<stamp>/` with `campaign-report.md` + `.json`.
 
-## Baseline assessment (7.7)
+## Baseline assessment
 
 Lab results against Docker AIWall (`block-secrets`): [reports/baseline-assessment.md](reports/baseline-assessment.md).
 
 - **Held:** SE-01 … SE-03 (secret paste → HTTP 403 / `secret-detected`)
 - **Skipped / inconclusive:** child profile, agent guardrails, hard cost limits, prompt-injection scoring (no upstream key)
 
-## Must-block regression (7.8)
+## Must-block regression
 
 CI fails if a previously-blocked attack starts succeeding. Registry: [`regression/must_block.json`](regression/must_block.json).
 
@@ -109,7 +109,7 @@ python3 regression/tests/test_regression.py
 
 GitHub Actions: [`.github/workflows/ci.yml`](.github/workflows/ci.yml).
 
-## Post-mitigation retest (7.9)
+## Post-mitigation retest
 
 Before/after deltas vs baseline: [reports/post-mitigation-retest.md](reports/post-mitigation-retest.md).
 

@@ -44,4 +44,4 @@ python3 garak/tests/test_garak_configs.py
 
 ## Reports
 
-Generated artifacts (jsonl / html / hitlog) are gitignored except placeholders. Keep baseline copies under `reports/` when you publish Phase 7.7 assessments.
+Generated artifacts (jsonl / html / hitlog) are gitignored except placeholders. Keep baseline copies under `reports/` when you publish baseline assessments.

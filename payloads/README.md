@@ -1,6 +1,6 @@
 # Payload library
 
-Category-organized probes for AIWall (Phase 7.3). Each file is one catalog technique.
+Category-organized probes for AIWall. Each file is one catalog technique.
 
 | Directory | Catalog category |
 |---|---|
