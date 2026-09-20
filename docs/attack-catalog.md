@@ -27,11 +27,11 @@ Detection overlap (when audit reasons fire): [AIWall-detections coverage matrix]
 
 | Id | Technique | OWASP | ATLAS | AIWall control today | Expected hold |
 |---|---|---|---|---|---|
-| **PI-01** | Direct instruction override | LLM01 | AML.T0051 | Custom policies; no dedicated injector yet | Policy-dependent; often still `allow` |
-| **PI-02** | Jailbreak / safety bypass | LLM01 | AML.T0054, AML.T0051 | Category / family policies | `category-blocked` when classifiers match |
-| **PI-03** | System / meta-prompt extraction | LLM07, LLM01 | AML.T0056, AML.T0051 | Gap | Usually `allow` — track bypasses as product work |
+| **PI-01** | Direct instruction override | LLM01 | AML.T0051 | `input.contains_injection` → `injection-detected` | Block when policy enabled (default examples) |
+| **PI-02** | Jailbreak / safety bypass | LLM01 | AML.T0054, AML.T0051 | Category / family policies; dedicated jailbreak reason for DAN-style probes | `category-blocked` or `jailbreak-detected` |
+| **PI-03** | System / meta-prompt extraction | LLM07, LLM01 | AML.T0056, AML.T0051 | `input.contains_jailbreak` → `jailbreak-detected` | Block when policy enabled |
 
-**Notes:** Gateway-level injection detection is an intentional gap, tracked in the AIWall-detections ATLAS coverage matrix (AML.T0051, AML.T0054, AML.T0056). Results from these techniques feed detection and product backlogs rather than matching any current Wazuh rule.
+**Notes:** Gateway keyword classifiers emit `injection-detected` / `jailbreak-detected`. Enable `block-prompt-injection` / `block-jailbreak` in config (see AIWall deploy examples). SIEM: Wazuh 107217/107218.
 
 ---
 
