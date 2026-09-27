@@ -71,9 +71,9 @@
           "summary": "Prompt asks the model to encode or relay secrets outward (still visible to scanner if present in input).",
           "owasp_llm": ["LLM02"],
           "atlas": ["AML.T0024", "AML.T0057"],
-          "aiwall_controls": ["secret scanner on input; output DLP limited"],
-          "expected_hold": "Hold if secret appears in input; output-only exfil is a gap",
-          "sample_audit_hints": ["secret-detected"]
+          "aiwall_controls": ["secret scanner on input; rate_limits extraction-rate; output DLP limited"],
+          "expected_hold": "Hold if secret appears in input or volume cap hits; output-only exfil is a gap",
+          "sample_audit_hints": ["secret-detected", "extraction-rate"]
         }
       ]
     },

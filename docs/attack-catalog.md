@@ -43,7 +43,7 @@ Detection overlap (when audit reasons fire): [AIWall-detections coverage matrix]
 |---|---|---|---|---|---|
 | **SE-01** | Credential paste to provider | LLM02 | AML.T0057, AML.T0055 | Secret scanner + block/redact/warn | `secret-detected` / `secret-redacted` |
 | **SE-02** | Env / config dump | LLM02 | AML.T0057, AML.T0055 | dotenv / entropy detectors | block or redact per policy |
-| **SE-03** | Inference-path exfil framing | LLM02 | AML.T0024, AML.T0057 | Input scanning; limited output DLP | Hold if secret in **input**; output-only is a gap |
+| **SE-03** | Inference-path exfil framing | LLM02 | AML.T0024, AML.T0057 | Input scanning + `rate_limits` → `extraction-rate` | Hold if secret in **input** or volume cap hit; output-only is a gap |
 
 **Synthetic secrets only** — see RoE and methodology.
 
