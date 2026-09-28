@@ -24,9 +24,9 @@
           "summary": "Adversarial framing to evade model or gateway content restrictions.",
           "owasp_llm": ["LLM01"],
           "atlas": ["AML.T0054", "AML.T0051"],
-          "aiwall_controls": ["category policies", "family/child presets"],
-          "expected_hold": "May surface as category-blocked when content classifiers fire; pure jailbreak text may allow.",
-          "sample_audit_hints": ["category-blocked"]
+          "aiwall_controls": ["input.contains_jailbreak", "category policies", "family/child presets"],
+          "expected_hold": "block + jailbreak-detected on safety-bypass framing; category-blocked if child policies also fire",
+          "sample_audit_hints": ["jailbreak-detected"]
         },
         {
           "id": "PI-03",
@@ -71,9 +71,9 @@
           "summary": "Prompt asks the model to encode or relay secrets outward (still visible to scanner if present in input).",
           "owasp_llm": ["LLM02"],
           "atlas": ["AML.T0024", "AML.T0057"],
-          "aiwall_controls": ["secret scanner on input; rate_limits extraction-rate; output DLP limited"],
-          "expected_hold": "Hold if secret appears in input or volume cap hits; output-only exfil is a gap",
-          "sample_audit_hints": ["secret-detected", "extraction-rate"]
+          "aiwall_controls": ["secret scanner on input; output.contains_secret DLP; rate_limits extraction-rate"],
+          "expected_hold": "Hold if secret appears in input, in the model reply, or volume cap hits",
+          "sample_audit_hints": ["secret-detected", "output-secret-detected", "extraction-rate"]
         }
       ]
     },
@@ -126,8 +126,8 @@
           "owasp_llm": ["LLM06", "LLM02"],
           "atlas": ["AML.T0053", "AML.T0055"],
           "aiwall_controls": ["agent_guardrails file rules"],
-          "expected_hold": "block or require_approval per file.action",
-          "sample_audit_hints": []
+          "expected_hold": "block or require_approval per file.action; reason sensitive-file-access:<rule_id>",
+          "sample_audit_hints": ["sensitive-file-access:ssh-private-key"]
         },
         {
           "id": "AT-03",

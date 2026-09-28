@@ -11,7 +11,7 @@
     "must_hold": true,
     "http_status": [403],
     "decision": ["block", "redact"],
-    "reason_any": ["secret-detected", "secret-redacted"]
+    "reason_any": ["secret-detected", "secret-redacted", "output-secret-detected"]
   },
   "request": {
     "method": "POST",

@@ -5,6 +5,9 @@
 ### Changed
 
 - README headings no longer carry internal roadmap numbers (`Garak (7.4)` is now `Garak`). Section order and content are unchanged.
+- Jailbreak classifier covers PI-02 safety-bypass framing (`jailbreak-detected`) without a child profile.
+- SE-03 notes output DLP (`output-secret-detected`) in addition to input scanning and extraction-rate.
+- AT-02 expected hold is `sensitive-file-access:<rule_id>`.
 
 ### Fixed
 

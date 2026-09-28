@@ -28,7 +28,7 @@ Detection overlap (when audit reasons fire): [AIWall-detections coverage matrix]
 | Id | Technique | OWASP | ATLAS | AIWall control today | Expected hold |
 |---|---|---|---|---|---|
 | **PI-01** | Direct instruction override | LLM01 | AML.T0051 | `input.contains_injection` → `injection-detected` | Block when policy enabled (default examples) |
-| **PI-02** | Jailbreak / safety bypass | LLM01 | AML.T0054, AML.T0051 | Category / family policies; dedicated jailbreak reason for DAN-style probes | `category-blocked` or `jailbreak-detected` |
+| **PI-02** | Jailbreak / safety bypass | LLM01 | AML.T0054, AML.T0051 | `input.contains_jailbreak` (safety-bypass framing) | `jailbreak-detected` |
 | **PI-03** | System / meta-prompt extraction | LLM07, LLM01 | AML.T0056, AML.T0051 | `input.contains_jailbreak` → `jailbreak-detected` | Block when policy enabled |
 
 **Notes:** Gateway keyword classifiers emit `injection-detected` / `jailbreak-detected`. Enable `block-prompt-injection` / `block-jailbreak` in config (see AIWall deploy examples). SIEM: Wazuh 107217/107218.
@@ -43,7 +43,7 @@ Detection overlap (when audit reasons fire): [AIWall-detections coverage matrix]
 |---|---|---|---|---|---|
 | **SE-01** | Credential paste to provider | LLM02 | AML.T0057, AML.T0055 | Secret scanner + block/redact/warn | `secret-detected` / `secret-redacted` |
 | **SE-02** | Env / config dump | LLM02 | AML.T0057, AML.T0055 | dotenv / entropy detectors | block or redact per policy |
-| **SE-03** | Inference-path exfil framing | LLM02 | AML.T0024, AML.T0057 | Input scanning + `rate_limits` → `extraction-rate` | Hold if secret in **input** or volume cap hit; output-only is a gap |
+| **SE-03** | Inference-path exfil framing | LLM02 | AML.T0024, AML.T0057 | Input scanning + output DLP + `rate_limits` | `secret-detected` / `output-secret-detected` / `extraction-rate` |
 
 **Synthetic secrets only** — see RoE and methodology.
 
@@ -71,7 +71,7 @@ Playbook: [child-safety-block](https://github.com/MohsenBahremani/AIWall-detecti
 | Id | Technique | OWASP | ATLAS | AIWall control today | Expected hold |
 |---|---|---|---|---|---|
 | **AT-01** | Destructive shell | LLM06 | AML.T0050, AML.T0053 | `agent_guardrails` block / approval | `block` or `approval-denied` |
-| **AT-02** | Sensitive file read | LLM06, LLM02 | AML.T0053, AML.T0055 | File path rules | block / require_approval |
+| **AT-02** | Sensitive file read | LLM06, LLM02 | AML.T0053, AML.T0055 | File path rules | `sensitive-file-access:<rule_id>` |
 | **AT-03** | Medium-risk shell (e.g. sudo) | LLM06 | AML.T0050 | warn band | `warn` (partial) |
 
 Playbook: [suspicious-agent-action](https://github.com/MohsenBahremani/AIWall-detections/blob/main/playbooks/suspicious-agent-action.md).  
