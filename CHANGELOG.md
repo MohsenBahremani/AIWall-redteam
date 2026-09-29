@@ -8,6 +8,7 @@
 - Jailbreak classifier covers PI-02 safety-bypass framing (`jailbreak-detected`) without a child profile.
 - SE-03 notes output DLP (`output-secret-detected`) in addition to input scanning and extraction-rate.
 - AT-02 expected hold is `sensitive-file-access:<rule_id>`.
+- Attack catalog and PI-01 / PI-03 payloads now describe the shipped injection and jailbreak holds. The README baseline section is labeled as the 2026-08 snapshot.
 
 ### Fixed
 

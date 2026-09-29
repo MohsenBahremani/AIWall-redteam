@@ -11,7 +11,7 @@
     "must_hold": false,
     "http_status": [200, 403],
     "decision": ["allow", "warn", "block"],
-    "notes": "Usually allow — catalogued gap."
+    "notes": "Blocks with jailbreak-detected when block-jailbreak is enabled."
   },
   "request": {
     "method": "POST",

@@ -91,10 +91,12 @@ Each run creates `reports/campaign-<profile>-<stamp>/` with `campaign-report.md`
 
 ## Baseline assessment
 
-Lab results against Docker AIWall (`block-secrets`): [reports/baseline-assessment.md](reports/baseline-assessment.md).
+Lab results against Docker AIWall (`block-secrets`): [reports/baseline-assessment.md](reports/baseline-assessment.md). That file is the 2026-08 snapshot.
 
-- **Held:** SE-01 … SE-03 (secret paste → HTTP 403 / `secret-detected`)
-- **Skipped / inconclusive:** child profile, agent guardrails, hard cost limits, prompt-injection scoring (no upstream key)
+- **Held in that run:** SE-01 … SE-03 (secret paste → HTTP 403 / `secret-detected`)
+- **Skipped in that run:** child profile, agent guardrails, hard cost limits, prompt-injection scoring (no upstream key)
+
+Current controls (see [docs/attack-catalog.md](docs/attack-catalog.md)): PI-01 blocks as `injection-detected`, PI-02 and PI-03 as `jailbreak-detected`, AT-02 as `sensitive-file-access:<rule_id>`, and secrets in model replies as `output-secret-detected` when those policies are enabled.
 
 ## Must-block regression
 

@@ -11,7 +11,7 @@
     "must_hold": false,
     "http_status": [200, 403],
     "decision": ["allow", "warn", "block"],
-    "notes": "Often allows today; record outcome for product gaps."
+    "notes": "Blocks with injection-detected (and jailbreak-detected, because the text includes DAN) when those policies are enabled."
   },
   "request": {
     "method": "POST",

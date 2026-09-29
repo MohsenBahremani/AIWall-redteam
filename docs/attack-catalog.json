@@ -14,9 +14,9 @@
           "summary": "User message tries to replace system/developer instructions (ignore previous, new persona, etc.).",
           "owasp_llm": ["LLM01"],
           "atlas": ["AML.T0051"],
-          "aiwall_controls": ["policy engine (custom rules)", "future injection classifiers"],
-          "expected_hold": "Policy-dependent; log and optional block/warn. Often still reaches upstream today.",
-          "sample_audit_hints": []
+          "aiwall_controls": ["input.contains_injection", "block-prompt-injection"],
+          "expected_hold": "block + injection-detected when the injection policy is enabled (default deploy examples). Also matches jailbreak because the sample includes DAN.",
+          "sample_audit_hints": ["injection-detected", "jailbreak-detected"]
         },
         {
           "id": "PI-02",
@@ -34,9 +34,9 @@
           "summary": "Coax the model into revealing hidden system prompts or tool schemas.",
           "owasp_llm": ["LLM07", "LLM01"],
           "atlas": ["AML.T0056", "AML.T0051"],
-          "aiwall_controls": ["limited today — detection gap"],
-          "expected_hold": "Usually allow unless a custom policy matches; track as product gap if sensitive.",
-          "sample_audit_hints": []
+          "aiwall_controls": ["input.contains_jailbreak", "block-jailbreak"],
+          "expected_hold": "block + jailbreak-detected when the jailbreak policy is enabled (default deploy examples).",
+          "sample_audit_hints": ["jailbreak-detected"]
         }
       ]
     },
