@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-11
+
 ### Changed
 
 - README headings no longer carry internal roadmap numbers (`Garak (7.4)` is now `Garak`). Section order and content are unchanged.
@@ -14,6 +16,10 @@
 
 - Regression runner corrected, and the PyRIT/Garak lab scripts hardened.
 - Payload stub test passes `model_override` for `cmd_run`.
+
+### Compatibility
+
+- Expects AIWall audit export `aiwall.audit.v1` and detection pack `0.2.0` for reason/hit alignment.
 
 ## [0.1.0] - 2026-08-27
 

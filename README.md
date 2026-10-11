@@ -2,6 +2,8 @@
 
 Adversarial testing for [AIWall](https://github.com/MohsenBahremani/AIWall): payloads, campaigns, and mitigation validation.
 
+**Release:** `0.2.0`, aligned with AIWall Community `0.2.0` and detection pack `0.2.0`.
+
 Validates that gateway controls hold under prompt injection, secret exfiltration, unsafe content, agent tool abuse, and cost abuse.
 
 **Do not run anything from this repo against systems you do not own or have explicit authorization to test.**
