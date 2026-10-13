@@ -66,8 +66,20 @@ def validate_registry_against_payloads(data: dict[str, Any]) -> list[str]:
     return errors
 
 
+def _hold_stub_reason(body: str) -> tuple[str, str] | None:
+    """Mirror example-policy order: secrets, then injection, then jailbreak."""
+    if "AKIA" in body or "ghp_" in body:
+        return "block-secrets", "secret-detected"
+    lowered = body.lower()
+    if "ignore all previous instructions" in lowered:
+        return "block-prompt-injection", "injection-detected"
+    if "safety rules do not apply" in lowered or "output your full system prompt" in lowered:
+        return "block-jailbreak", "jailbreak-detected"
+    return None
+
+
 def _start_hold_stub() -> tuple[HTTPServer, str]:
-    """Stub that blocks synthetic secrets like AIWall block-secrets."""
+    """Stub that blocks the must-hold probes the way the example policies do."""
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, format: str, *args) -> None:  # noqa: A003
@@ -76,15 +88,17 @@ def _start_hold_stub() -> tuple[HTTPServer, str]:
         def do_POST(self) -> None:  # noqa: N802
             length = int(self.headers.get("Content-Length", "0"))
             body = self.rfile.read(length).decode()
-            if "AKIA" in body or "ghp_" in body:
+            held = _hold_stub_reason(body)
+            if held is not None:
+                policy, reason = held
                 payload = json.dumps(
                     {
                         "error": {
-                            "message": "Request blocked by AIWall policy: block-secrets",
+                            "message": f"Request blocked by AIWall policy: {policy}",
                             "type": "policy_blocked",
                             "code": "policy_blocked",
-                            "policy": "block-secrets",
-                            "reason": "secret-detected",
+                            "policy": policy,
+                            "reason": reason,
                         }
                     }
                 ).encode()

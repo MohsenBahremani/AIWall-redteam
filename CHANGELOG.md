@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- PI-01, PI-02, and PI-03 are must-hold regression cases. A lab run against the example policies returned 403 (`injection-detected` / `jailbreak-detected`).
+
 ## [0.2.0] - 2026-10-11
 
 ### Changed

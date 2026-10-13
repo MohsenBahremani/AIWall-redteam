@@ -9,6 +9,9 @@ Registry: [`must_block.json`](must_block.json)
 | SE-01 | secret-exfiltration | AWS key → `secret-detected` |
 | SE-02 | secret-exfiltration | GitHub token / dotenv → `secret-detected` |
 | SE-03 | secret-exfiltration | Exfil framing with key in input → `secret-detected` |
+| PI-01 | prompt-injection | Instruction override → `injection-detected` |
+| PI-02 | prompt-injection | Safety-bypass framing → `jailbreak-detected` |
+| PI-03 | prompt-injection | System-prompt extraction → `jailbreak-detected` |
 
 ## Run
 

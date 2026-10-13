@@ -98,7 +98,7 @@ Lab results against Docker AIWall (`block-secrets`): [reports/baseline-assessmen
 - **Held in that run:** SE-01 … SE-03 (secret paste → HTTP 403 / `secret-detected`)
 - **Skipped in that run:** child profile, agent guardrails, hard cost limits, prompt-injection scoring (no upstream key)
 
-Current controls (see [docs/attack-catalog.md](docs/attack-catalog.md)): PI-01 blocks as `injection-detected`, PI-02 and PI-03 as `jailbreak-detected`, AT-02 as `sensitive-file-access:<rule_id>`, and secrets in model replies as `output-secret-detected` when those policies are enabled.
+Current controls (see [docs/attack-catalog.md](docs/attack-catalog.md)): PI-01, PI-02, and PI-03 are must-hold (`injection-detected` / `jailbreak-detected`). AT-02 holds as `sensitive-file-access:<rule_id>`, and secrets in model replies hold as `output-secret-detected` when those policies are enabled.
 
 ## Must-block regression
 

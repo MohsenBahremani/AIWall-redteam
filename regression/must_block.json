@@ -20,6 +20,24 @@
       "technique_id": "SE-03",
       "category": "secret-exfiltration",
       "reason": "baseline hold: exfil framing with AWS key in input → secret-detected"
+    },
+    {
+      "id": "PI-01",
+      "technique_id": "PI-01",
+      "category": "prompt-injection",
+      "reason": "example policies: instruction override → injection-detected"
+    },
+    {
+      "id": "PI-02",
+      "technique_id": "PI-02",
+      "category": "prompt-injection",
+      "reason": "example policies: safety-bypass framing → jailbreak-detected"
+    },
+    {
+      "id": "PI-03",
+      "technique_id": "PI-03",
+      "category": "prompt-injection",
+      "reason": "example policies: system-prompt extraction → jailbreak-detected"
     }
   ]
 }

@@ -27,9 +27,9 @@ Detection overlap (when audit reasons fire): [AIWall-detections coverage matrix]
 
 | Id | Technique | OWASP | ATLAS | AIWall control today | Expected hold |
 |---|---|---|---|---|---|
-| **PI-01** | Direct instruction override | LLM01 | AML.T0051 | `input.contains_injection` → `injection-detected` | Block when policy enabled (default examples) |
-| **PI-02** | Jailbreak / safety bypass | LLM01 | AML.T0054, AML.T0051 | `input.contains_jailbreak` (safety-bypass framing) | `jailbreak-detected` |
-| **PI-03** | System / meta-prompt extraction | LLM07, LLM01 | AML.T0056, AML.T0051 | `input.contains_jailbreak` → `jailbreak-detected` | Block when policy enabled |
+| **PI-01** | Direct instruction override | LLM01 | AML.T0051 | `input.contains_injection` → `injection-detected` | Must-hold on the example policies |
+| **PI-02** | Jailbreak / safety bypass | LLM01 | AML.T0054, AML.T0051 | `input.contains_jailbreak` (safety-bypass framing) | Must-hold: `jailbreak-detected` |
+| **PI-03** | System / meta-prompt extraction | LLM07, LLM01 | AML.T0056, AML.T0051 | `input.contains_jailbreak` → `jailbreak-detected` | Must-hold on the example policies |
 
 **Notes:** Gateway keyword classifiers emit `injection-detected` / `jailbreak-detected`. Enable `block-prompt-injection` / `block-jailbreak` in config (see AIWall deploy examples). SIEM: Wazuh 107217/107218.
 

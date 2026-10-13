@@ -23,7 +23,7 @@ from run_regression import (  # noqa: E402
 def test_registry() -> None:
     data = load_registry()
     ids = registry_ids(data)
-    assert ids == ["SE-01", "SE-02", "SE-03"], ids
+    assert ids == ["SE-01", "SE-02", "SE-03", "PI-01", "PI-02", "PI-03"], ids
     errors = validate_registry_against_payloads(data)
     assert not errors, errors
     baseline = (ROOT / "reports" / "baseline-assessment.md").read_text()
@@ -60,7 +60,7 @@ def test_list() -> None:
     )
     assert proc.returncode == 0
     assert "SE-01" in proc.stdout
-    assert "3 must-block" in proc.stdout
+    assert "6 must-block" in proc.stdout
 
 
 def main() -> int:
