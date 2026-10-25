@@ -2,9 +2,15 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-10-24
+
 ### Changed
 
 - PI-01, PI-02, and PI-03 are must-hold regression cases. A lab run against the example policies returned 403 (`injection-detected` / `jailbreak-detected`).
+
+### Compatibility
+
+- Expects AIWall audit export `aiwall.audit.v1` and detection pack `0.2.1`. Community `>= 0.2.0` still matches.
 
 ## [0.2.0] - 2026-10-11
 
